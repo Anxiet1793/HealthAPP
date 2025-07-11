@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema base de la aplicación -->
+    <style name="Theme.MyApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Colores principales -->
+        <item name="colorPrimary">@color/verde_claro</item>
+        <item name="colorPrimaryVariant">@color/verde_fuerte</item>
+        <item name="colorOnPrimary">@color/negro</item>
+
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/verde_claro</item>
+        <item name="colorSecondaryVariant">@color/verde_claro</item>
+        <item name="colorOnSecondary">@color/negro</item>
+
+        <!-- Color de la barra de estado -->
+        <item name="android:statusBarColor">@color/verde_fuerte</item>
+        <!-- Otros estilos -->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

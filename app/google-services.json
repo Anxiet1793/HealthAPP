@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "852657501886",
+    "project_id": "healthapp-3ac41",
+    "storage_bucket": "healthapp-3ac41.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852657501886:android:6b325ff2526098124350ef",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852657501886-vo6pdtff1nlp5bqa41k6r8vkngpjtrto.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "d66541741e877943cb2cbc7fb3c6a6cdeb2707eb"
+          }
+        },
+        {
+          "client_id": "852657501886-knvo2ls1hs28ilar393ev4uiupd0ltvd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6fyLYjVGhUEqpvPKCkk4MASA0JphztUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852657501886-knvo2ls1hs28ilar393ev4uiupd0ltvd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

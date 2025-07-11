@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainPasosDiarios"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PasosDiarios">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="24dp" >
+        <TextView
+            android:id="@+id/tvTituloPasos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pasos del Día"
+            android:textSize="26sp"
+            android:textStyle="italic"
+            android:textColor="#7DDC6D"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Contenedor reutilizable -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_bg">
+
+            <TextView
+                android:id="@+id/tvPromedio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Promedio Diario:"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tvValorPromedio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Misión del Día -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_bg">
+
+            <TextView
+                android:id="@+id/tvMision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Misión del Día:"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tvValorMision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Racha -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_bg">
+
+            <TextView
+                android:id="@+id/tvRacha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Racha:"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tvValorRacha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Medallas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_bg">
+
+            <TextView
+                android:id="@+id/tvMedalla"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medallas:"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tvValorMedalla"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Menú inferior -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/btnConfig"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btnConfig"
+                android:background="@drawable/rounded_button"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/btnInicio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btninicio"
+                android:background="@drawable/rounded_button"
+                android:textColor="#000000"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btnDesafios"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btnMisiones"
+                android:background="@drawable/rounded_button"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

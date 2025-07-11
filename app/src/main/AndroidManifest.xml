@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Permiso de Internet necesario para Google Sign-In -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permisos de Health Connect -->
+    <uses-permission android:name="android.permission.health.READ_STEPS"/>
+    <uses-permission android:name="android.permission.health.READ_WEIGHT"/>
+    <uses-permission android:name="android.permission.health.READ_HEIGHT"/>
+    <uses-permission android:name="android.permission.health.READ_SLEEP"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" /> <!-- Cambiado a false, ya no es LAUNCHER -->
+        <activity
+            android:name=".PasosDiarios"
+            android:exported="false" />
+
+        <!-- Actividad para la configuración de permisos de Health Connect -->
+
+        <!-- Metadatos para indicar que se debe mostrar la justificación de los permisos -->
+        <meta-data
+            android:name="health_permissions_should_show_rationale"
+            android:value="true" />
+
+    </application>
+
+</manifest>

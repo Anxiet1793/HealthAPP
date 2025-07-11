@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="titlelbl">Bienvenido,!</string>
+    <string name="lblPasos">Pasos Diarios</string>
+    <string name="lblCalorias">Calorías Consumidas</string>
+    <string name="lblPeso">Peso Ideal</string>
+    <string name="lblHorasSueño">Horas de Sueño</string>
+    <string name="btnVer">Ver</string>
+    <string name="btnCalcular">Calcular</string>
+    <string name="btnDetalles">Detalles</string>
+    <string name="lblPromedioDiario">Promedio Diario:</string>
+    <string name="lblMision">Misión del día:</string>
+    <string name="lblRacha">Racha:</string>
+    <string name="lblMedallas">Medallas:</string>
+    <string name="btnConfig">Configuracion</string>
+    <string name="btninicio">Inicio</string>
+    <string name="btnMisiones">Misiones</string>
+    <string name="PasosDiarioslbl">Pasos Diarios</string>
+</resources>
