@@ -5,6 +5,15 @@
     <string name="lblCalorias">Calorías Consumidas</string>
     <string name="lblPeso">Peso Ideal</string>
     <string name="lblHorasSueño">Horas de Sueño</string>
+    <string name="lblCaloria1">Hora del dia (12 am - 7 am)</string>
+    <string name="lblCaloria2">Hora del dia (7 am - 12 pm)</string>
+    <string name="lblCaloria3">Hora del dia (12 pm - 6 pm)</string>
+    <string name="lblCaloria4">Hora del dia (6 pm - 12 am)</string>
+    <string name="txtCantidadCalorias1">Calorias consumidas:</string>
+    <string name="txtCantidadCalorias2">Calorias consumidas:</string>
+    <string name="txtCantidadCalorias3">Calorias consumidas:</string>
+    <string name="txtCantidadCalorias4">Calorias consumidas:</string>
+    <string name="txtMostrarCalorias">Resultados de las calorias::</string>
     <string name="btnVer">Ver</string>
     <string name="btnCalcular">Calcular</string>
     <string name="btnDetalles">Detalles</string>
