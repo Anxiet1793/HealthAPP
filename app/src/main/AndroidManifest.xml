@@ -2,14 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permiso de Internet necesario para Google Sign-In -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Permisos de Health Connect -->
     <uses-permission android:name="android.permission.health.READ_STEPS"/>
+    <uses-permission android:name="android.permission.health.WRITE_STEPS"/>
     <uses-permission android:name="android.permission.health.READ_WEIGHT"/>
     <uses-permission android:name="android.permission.health.READ_HEIGHT"/>
     <uses-permission android:name="android.permission.health.READ_SLEEP"/>
+
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -20,28 +23,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" /> <!-- Cambiado a false, ya no es LAUNCHER -->
-        <activity
-            android:name=".PasosDiarios"
-            android:exported="false" />
 
-        <!-- Actividad para la configuración de permisos de Health Connect -->
+    <activity
+        android:name=".LoginActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
 
-        <!-- Metadatos para indicar que se debe mostrar la justificación de los permisos -->
-        <meta-data
-            android:name="health_permissions_should_show_rationale"
-            android:value="true" />
+    <activity
+        android:name=".MainActivity"
+        android:exported="true">
+    </activity>
 
-    </application>
+    <activity
+        android:name=".PasosDiarios"
+        android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+            <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
+        </intent-filter>
+    </activity>
+
+
+</application>
 
 </manifest>

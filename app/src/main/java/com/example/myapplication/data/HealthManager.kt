@@ -17,6 +17,7 @@ class HealthManager(private val context: Context) {
     // Updated getPermissions function
     fun getPermissions(): Set<String> = setOf(
         HealthPermission.getReadPermission(StepsRecord::class),
+        HealthPermission.getWritePermission(StepsRecord::class),
         HealthPermission.getReadPermission(WeightRecord::class),
         HealthPermission.getReadPermission(HeightRecord::class),
         HealthPermission.getReadPermission(SleepSessionRecord::class)
