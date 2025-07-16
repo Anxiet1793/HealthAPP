@@ -78,7 +78,8 @@
             android:text="Calcular y Guardar IMC"
             android:layout_marginTop="16dp"
             android:textColor="#000000"
-            android:background="@drawable/rounded_button" />
+            android:background="@drawable/rounded_button"
+            android:textAllCaps="false"/>
 
         <!-- Resultados -->
         <LinearLayout
@@ -135,7 +136,8 @@
                 android:layout_weight="1"
                 android:text="@string/btnConfig"
                 android:background="@drawable/rounded_button"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textAllCaps="false"/>
 
             <Button
                 android:id="@+id/btnInicioIMC"
@@ -146,7 +148,8 @@
                 android:background="@drawable/rounded_button"
                 android:textColor="#000000"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="8dp"
+                android:textAllCaps="false"/>
 
             <Button
                 android:id="@+id/btnDesafios"
@@ -155,7 +158,8 @@
                 android:layout_weight="1"
                 android:text="@string/btnMisiones"
                 android:background="@drawable/rounded_button"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textAllCaps="false"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
