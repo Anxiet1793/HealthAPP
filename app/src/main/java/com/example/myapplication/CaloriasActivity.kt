@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -34,6 +35,11 @@ class CaloriasActivity : AppCompatActivity() {
 
         btnGuardarCalorias.setOnClickListener {
             recogerYProcesarDatos()
+        }
+        val btnInicio = findViewById<Button>(R.id.btnInicio)
+        btnInicio.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
