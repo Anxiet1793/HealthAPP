@@ -1,0 +1,42 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can only read and write their own document.
+    // They can create their own document.
+    match /users/{userId} {
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null;
+    }
+
+    // IMC data can only be read, written, and created by the owner of the user document.
+    match /users/{userId}/imc/{imcId} {
+      allow read, write, create: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Daily data can only be read, written, and created by the owner of the user document.
+    match /users/{userId}/daily_data/{dailyDataId} {
+      allow read, write, create: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Achievements are readable by any authenticated user, but not writable (admin only).
+    // For now, we'll deny all writes. In a real app, you'd have an admin role.
+    match /achievements/{achievementId} {
+      allow read: if request.auth != null;
+      allow write: if false; // Deny writes for now, implement admin logic later
+    }
+
+    // UserMissions can be read and written by the owning user.
+    // Creation is also allowed by the owning user.
+    match /user_missions/{missionId} {
+      allow read, create, update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // Achievement types are readable by any authenticated user (admin only for writes).
+    match /achievement_types/{typeId} {
+      allow read: if request.auth != null;
+      allow write: if false; // Deny writes for now, implement admin logic later
+    }
+  }
+}

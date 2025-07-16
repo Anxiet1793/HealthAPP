@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -21,11 +22,12 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val PREFS_NAME = "MyPrefsFile"
         const val CONSENT_GIVEN_KEY = "health_consent_given"
+        const val GENDER_KEY = "user_gender"
+        const val GENDER_SET_KEY = "gender_set"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // enableEdgeToEdge() // Se comenta si causa problemas o no es estrictamente necesario para el ejemplo
         setContentView(R.layout.activity_main)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -37,54 +39,83 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
         privacyPolicyLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            // Este bloque se ejecuta cuando PrivacyPolicyActivity regresa.
-            // Volvemos a mostrar el diálogo de consentimiento para que el usuario pueda actuar.
             mostrarDialogoConsentimiento()
         }
 
         val botonVerPasos = findViewById<Button>(R.id.btnVerPasos)
-
         botonVerPasos.setOnClickListener {
             if (sharedPreferences.getBoolean(CONSENT_GIVEN_KEY, false)) {
-                // El consentimiento ya fue otorgado, iniciar PasosDiarios directamente
                 val intent = Intent(this, PasosDiarios::class.java)
                 startActivity(intent)
             } else {
-                // Mostrar el diálogo de consentimiento
                 mostrarDialogoConsentimiento()
             }
         }
+
+        // Check if gender has been set, if not, show dialog
+        if (!sharedPreferences.getBoolean(GENDER_SET_KEY, false)) {
+            solicitarGenero()
+        } //else {
+            // Optionally, if consent is given but gender is not set (e.g. older version users),
+            // you might want to prompt for gender here too, or after consent.
+            // For now, new users will see gender dialog first if not set.
+        //}
+
+        // Add a button to navigate to ImcActivity (Example)
+        val btnGoToImc = findViewById<Button>(R.id.btnCalcularPeso) // Assuming R.id.btnCalcularPeso is for IMC
+        btnGoToImc.setOnClickListener {
+            startActivity(Intent(this, ImcActivity::class.java))
+        }
+
+        val btnGoToCalorias = findViewById<Button>(R.id.btncalorias)
+        btnGoToCalorias.setOnClickListener {
+            startActivity(Intent(this, CaloriasActivity::class.java))
+        }
+    }
+
+    private fun solicitarGenero() {
+        val genderOptions = arrayOf(getString(R.string.gender_male), getString(R.string.gender_female))
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.gender_dialog_title))
+        builder.setCancelable(false) // User must choose
+        builder.setItems(genderOptions) { dialog, which ->
+            val selectedGender = genderOptions[which]
+            with(sharedPreferences.edit()) {
+                putString(GENDER_KEY, selectedGender)
+                putBoolean(GENDER_SET_KEY, true)
+                apply()
+            }
+            Toast.makeText(this, getString(R.string.gender_selected_toast, selectedGender), Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+            // After gender selection, you might want to proceed to consent dialog if not given
+            // or to the main app flow if consent is already handled.
+            // For this example, it just dismisses. Consider the full user flow.
+        }
+        builder.show()
     }
 
     private fun mostrarDialogoConsentimiento() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.consent_dialog_title))
         builder.setMessage(getString(R.string.consent_dialog_message))
-        builder.setCancelable(false) // Evitar que se cierre al tocar fuera o con botón atrás
+        builder.setCancelable(false)
 
         builder.setPositiveButton(getString(R.string.accept)) { dialog, which ->
-            // Guardar que el consentimiento fue otorgado
             with(sharedPreferences.edit()) {
                 putBoolean(CONSENT_GIVEN_KEY, true)
                 apply()
             }
-            // Iniciar PasosDiarios Activity
             val intent = Intent(this, PasosDiarios::class.java)
             startActivity(intent)
         }
 
         builder.setNegativeButton(getString(R.string.cancel)) { dialog, which ->
-            // El usuario canceló. Puedes mostrar un Toast o no hacer nada.
-            // Podrías considerar si quieres cerrar la app o deshabilitar funciones.
             dialog.dismiss()
         }
 
         builder.setNeutralButton(getString(R.string.privacy_policy)) { dialog, which ->
-            // Abrir PrivacyPolicyActivity usando el launcher
             val intent = Intent(this, PrivacyPolicyActivity::class.java)
             privacyPolicyLauncher.launch(intent)
-            // El diálogo se cerrará automáticamente al iniciar otra actividad.
-            // El launcher se encargará de reabrir el diálogo al volver.
         }
 
         val dialog = builder.create()

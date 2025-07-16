@@ -6,6 +6,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class CaloriasActivity : AppCompatActivity() {
 
@@ -57,15 +59,15 @@ class CaloriasActivity : AppCompatActivity() {
             Toast.makeText(this, "Datos listos para guardar. Total: $totalCalorias", Toast.LENGTH_LONG).show()
 
             // TODO: Implementar la subida a Firebase
-            // val datosCalorias = hashMapOf(
-            //     "comida1" to cal1,
-            //     "comida2" to cal2,
-            //     "comida3" to cal3,
-            //     "comida4" to cal4,
-            //     "total_calorias" to totalCalorias,
-            //     "timestamp" to System.currentTimeMillis() // o FieldValue.serverTimestamp() para Firestore
-            // )
-            // subirDatosAFirebase(datosCalorias)
+             val datosCalorias = hashMapOf(
+                 "comida1" to cal1,
+                 "comida2" to cal2,
+                 "comida3" to cal3,
+                "comida4" to cal4,
+                 "total_calorias" to totalCalorias,
+                 "timestamp" to System.currentTimeMillis() // o FieldValue.serverTimestamp() para Firestore
+             )
+                subirDatosAFirebase(datosCalorias)
 
         } catch (e: NumberFormatException) {
             Toast.makeText(this, "Por favor, ingrese solo números válidos para las calorías.", Toast.LENGTH_LONG).show()
@@ -73,23 +75,23 @@ class CaloriasActivity : AppCompatActivity() {
         }
     }
 
-    // private fun subirDatosAFirebase(datos: Map<String, Any>) {
-    //     // Lógica para Firebase (Realtime Database o Firestore)
-    //     // val userId = FirebaseAuth.getInstance().currentUser?.uid
-    //     // if (userId == null) {
-    //     //     Toast.makeText(this, "Usuario no autenticado.", Toast.LENGTH_SHORT).show()
-    //     //     return
-    //     // }
-    //     // FirebaseDatabase.getInstance().getReference("calorias_usuarios")
-    //     //     .child(userId)
-    //     //     .child("entradas_calorias")
-    //     //     .push() // Crea un ID único para la entrada
-    //     //     .setValue(datos)
-    //     //     .addOnSuccessListener {
-    //     //         Toast.makeText(this, "Datos guardados exitosamente.", Toast.LENGTH_SHORT).show()
-    //     //     }
-    //     //     .addOnFailureListener {
-    //     //         Toast.makeText(this, "Error al guardar datos: ${it.message}", Toast.LENGTH_SHORT).show()
-    //     //     }
-    // }
+     private fun subirDatosAFirebase(datos: Map<String, Any>) {
+          //Lógica para Firebase (Realtime Database o Firestore)
+          val userId = FirebaseAuth.getInstance().currentUser?.uid
+          if (userId == null) {
+             Toast.makeText(this, "Usuario no autenticado.", Toast.LENGTH_SHORT).show()
+              return
+          }
+          FirebaseDatabase.getInstance().getReference("calorias_usuarios")
+              .child(userId)
+              .child("entradas_calorias")
+              .push() // Crea un ID único para la entrada
+              .setValue(datos)
+            .addOnSuccessListener {
+                  Toast.makeText(this, "Datos guardados exitosamente.", Toast.LENGTH_SHORT).show()
+              }
+              .addOnFailureListener {
+                  Toast.makeText(this, "Error al guardar datos: ${it.message}", Toast.LENGTH_SHORT).show()
+              }
+     }
 }

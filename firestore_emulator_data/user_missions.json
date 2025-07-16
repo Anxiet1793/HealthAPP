@@ -1,0 +1,16 @@
+[
+      {
+        "_id": "mission1",
+        "userId": "user123",
+        "achievementId": "ach_step_master",
+        "completed_at": "2025-07-16T14:22:00Z",
+        "score_awarded": 100,
+        "status": "completed"
+      },
+      {
+        "_id": "mission2",
+        "userId": "user456",
+        "achievementId": "ach_calorie_burn_gold",
+        "status": "pending"
+      }
+    ]

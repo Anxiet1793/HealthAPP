@@ -1,0 +1,1 @@
+This directory contains sample JSON data for Firestore Emulator import.

@@ -1,0 +1,24 @@
+[
+      {
+        "_id": "user123",
+        "name": "Juan Pérez",
+        "email": "juan@example.com",
+        "birth_date": "1995-06-21",
+        "gender": "male",
+        "height_cm": 175,
+        "weight_kg": 70,
+        "total_score": 1200,
+        "registration_date": "2025-07-16T19:00:00Z"
+      },
+      {
+        "_id": "user456",
+        "name": "Ana Gómez",
+        "email": "ana@example.com",
+        "birth_date": "1990-11-10",
+        "gender": "female",
+        "height_cm": 162,
+        "weight_kg": 58,
+        "total_score": 850,
+        "registration_date": "2025-07-15T10:30:00Z"
+      }
+    ]

@@ -1,0 +1,29 @@
+[
+      {
+        "_id": "imc_user123_1",
+        "userId": "user123",
+        "date": "2025-07-16",
+        "weight_kg": 70,
+        "height_cm": 175,
+        "bmi": 22.86,
+        "classification": "Normal"
+      },
+      {
+        "_id": "imc_user123_2",
+        "userId": "user123",
+        "date": "2025-08-01",
+        "weight_kg": 71,
+        "height_cm": 175,
+        "bmi": 23.18,
+        "classification": "Normal"
+      },
+      {
+        "_id": "imc_user456_1",
+        "userId": "user456",
+        "date": "2025-07-15",
+        "weight_kg": 58,
+        "height_cm": 162,
+        "bmi": 22.09,
+        "classification": "Normal"
+      }
+    ]

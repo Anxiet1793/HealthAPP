@@ -1,0 +1,14 @@
+[
+      {
+        "_id": "steps",
+        "name": "Daily Steps",
+        "unit": "steps",
+        "description": "Achievements related to step count"
+      },
+      {
+        "_id": "total_calories_day",
+        "name": "Daily Calorie Burn",
+        "unit": "calories",
+        "description": "Achievements related to total calories burned in a day"
+      }
+    ]

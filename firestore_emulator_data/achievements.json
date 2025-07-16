@@ -1,0 +1,22 @@
+[
+      {
+        "_id": "ach_step_master",
+        "name": "Step Master",
+        "description": "Walk more than 10,000 steps in a day",
+        "criteria": {
+          "type": "steps",
+          "threshold": 10000
+        },
+        "score": 100
+      },
+      {
+        "_id": "ach_calorie_burn_gold",
+        "name": "Calorie Burn Gold",
+        "description": "Burn more than 2000 calories in a day",
+        "criteria": {
+          "type": "total_calories_day",
+          "threshold": 2000
+        },
+        "score": 150
+      }
+    ]
