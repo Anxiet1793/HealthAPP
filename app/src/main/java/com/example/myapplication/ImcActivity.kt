@@ -1,10 +1,12 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.R.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,19 +27,24 @@ class ImcActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_imc)
+        setContentView(layout.activity_imc)
 
-        etHeight = findViewById(R.id.etHeight)
-        etWeight = findViewById(R.id.etWeight)
-        btnCalculateImc = findViewById(R.id.btnCalculateImc)
-        tvImcResultValue = findViewById(R.id.tvImcResultValue)
-        tvImcClassificationValue = findViewById(R.id.tvImcClassificationValue)
+        etHeight = findViewById(id.etHeight)
+        etWeight = findViewById(id.etWeight)
+        btnCalculateImc = findViewById(id.btnCalculateImc)
+        tvImcResultValue = findViewById(id.tvImcResultValue)
+        tvImcClassificationValue = findViewById(id.tvImcClassificationValue)
 
         firestore = FirebaseFirestore.getInstance()
         firebaseAuth = FirebaseAuth.getInstance()
 
         btnCalculateImc.setOnClickListener {
             calculateAndSaveImc()
+        }
+        val btnInicio = findViewById<Button>(R.id.btnInicioIMC)
+        btnInicio.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -108,4 +115,7 @@ class ImcActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error al guardar IMC: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
+
 }
+
+

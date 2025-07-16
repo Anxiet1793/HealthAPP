@@ -13,9 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapplication.ui.PrivacyPolicyActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var privacyPolicyLauncher: ActivityResultLauncher<Intent>
 
@@ -71,13 +74,15 @@ class MainActivity : AppCompatActivity() {
         btnGoToCalorias.setOnClickListener {
             startActivity(Intent(this, CaloriasActivity::class.java))
         }
+        firebaseAuth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
     }
 
     private fun solicitarGenero() {
         val genderOptions = arrayOf(getString(R.string.gender_male), getString(R.string.gender_female))
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.gender_dialog_title))
-        builder.setCancelable(false) // User must choose
+        builder.setCancelable(false) // Usuario debe elegir
         builder.setItems(genderOptions) { dialog, which ->
             val selectedGender = genderOptions[which]
             with(sharedPreferences.edit()) {
@@ -85,14 +90,29 @@ class MainActivity : AppCompatActivity() {
                 putBoolean(GENDER_SET_KEY, true)
                 apply()
             }
+
             Toast.makeText(this, getString(R.string.gender_selected_toast, selectedGender), Toast.LENGTH_SHORT).show()
             dialog.dismiss()
-            // After gender selection, you might want to proceed to consent dialog if not given
-            // or to the main app flow if consent is already handled.
-            // For this example, it just dismisses. Consider the full user flow.
+
+            // Actualizar en Firestore
+            val user = firebaseAuth.currentUser
+            if (user != null) {
+                val userId = user.uid
+                val updates = mapOf("gender" to selectedGender)
+
+                firestore.collection("users").document(userId)
+                    .update(updates)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Género actualizado en Firestore", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error al guardar género: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            }
         }
         builder.show()
     }
+
 
     private fun mostrarDialogoConsentimiento() {
         val builder = AlertDialog.Builder(this)

@@ -2,144 +2,199 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="24dp"
-        tools:ignore="MissingConstraints">
-        <TextView
-            android:id="@+id/lblCalorias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lblCalorias"
-            android:textColor="#7DDC6D"
-            android:textSize="38sp"
-            android:textStyle="italic"
-            android:layout_marginBottom="24dp"/>
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <!-- Primer ingreso de calorias -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginHorizontal="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginVertical="8dp"
-            android:padding="16dp"
             android:gravity="center"
-            android:layout_marginHorizontal="16dp"
-            android:clipToOutline="true"
-            android:background="@drawable/rounded_bg">
+            android:padding="24dp">
+
             <TextView
+                android:id="@+id/lblCalorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblCalorias"
+                android:textColor="#7DDC6D"
+                android:textSize="38sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Primer ingreso de calorias -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/lblCaloria1"
+                android:orientation="vertical"
+                android:layout_marginVertical="8dp"
+                android:padding="16dp"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:clipToOutline="true"
+                android:background="@drawable/rounded_bg">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lblCaloria1"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+                <EditText
+                    android:id="@+id/txtCantidadCalorias1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txtCantidadCalorias1"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <!-- Segundo ingreso de calorias -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="8dp"
+                android:padding="16dp"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:clipToOutline="true"
+                android:background="@drawable/rounded_bg">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lblCaloria2"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+                <EditText
+                    android:id="@+id/txtCantidadCalorias2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txtCantidadCalorias2"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <!-- Tercer ingreso de calorias -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="8dp"
+                android:padding="16dp"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:clipToOutline="true"
+                android:background="@drawable/rounded_bg">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lblCaloria3"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+                <EditText
+                    android:id="@+id/txtCantidadCalorias3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txtCantidadCalorias3"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <!-- Cuarto ingreso de calorias -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="8dp"
+                android:padding="16dp"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:clipToOutline="true"
+                android:background="@drawable/rounded_bg">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lblCaloria4"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+                <EditText
+                    android:id="@+id/txtCantidadCalorias4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txtCantidadCalorias4"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtMostrarSumaCalorias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txtMostrarCalorias"
+                android:layout_marginTop="25dp"
                 android:textSize="22dp"
                 android:textStyle="bold"
-                android:textColor="#000000"/>
-            <EditText
-                android:id="@+id/txtCantidadCalorias1"
+                android:textColor="#000000"
+                android:gravity="center_horizontal" />
+
+            <Button
+                android:id="@+id/btnGuardarCalorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Guardar Calorías" />
+
+            <!-- Botones de navegación -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txtCantidadCalorias1"
-                android:inputType="number"/>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/btnConfig"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btnConfig"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/btnInicio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btninicio"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="#000000"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnDesafios"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btnMisiones"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Segundo ingreso de calorias -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginVertical="8dp"
-            android:padding="16dp"
-            android:gravity="center"
-            android:layout_marginHorizontal="16dp"
-            android:clipToOutline="true"
-            android:background="@drawable/rounded_bg">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lblCaloria2"
-                android:textSize="22dp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
-            <EditText
-                android:id="@+id/txtCantidadCalorias2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/txtCantidadCalorias2"
-                android:inputType="number"/>
-        </LinearLayout>
-
-        <!-- Tercer ingreso de calorias -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginVertical="8dp"
-            android:padding="16dp"
-            android:gravity="center"
-            android:layout_marginHorizontal="16dp"
-            android:clipToOutline="true"
-            android:background="@drawable/rounded_bg">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lblCaloria3"
-                android:textSize="22dp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
-            <EditText
-                android:id="@+id/txtCantidadCalorias3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/txtCantidadCalorias3"
-                android:inputType="number"/>
-        </LinearLayout>
-
-        <!-- Cuarto ingreso de calorias -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginVertical="8dp"
-            android:padding="16dp"
-            android:gravity="center"
-            android:layout_marginHorizontal="16dp"
-            android:clipToOutline="true"
-            android:background="@drawable/rounded_bg">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lblCaloria4"
-                android:textSize="22dp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
-            <EditText
-                android:id="@+id/txtCantidadCalorias4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/txtCantidadCalorias4"
-                android:inputType="number"/>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/txtMostrarSumaCalorias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txtMostrarCalorias"
-            android:layout_marginTop="25dp"
-            android:textSize="22dp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:gravity="center_horizontal"/>
-
-        <Button
-            android:id="@+id/btnGuardarCalorias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Guardar Calorías" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

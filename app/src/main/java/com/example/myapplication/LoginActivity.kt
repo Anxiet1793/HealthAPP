@@ -12,8 +12,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
 
@@ -77,7 +79,49 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential exitoso")
-                    navigateToMainActivity()
+
+                    val user = firebaseAuth.currentUser
+                    val db = FirebaseFirestore.getInstance()
+
+                    user?.let {
+                        val userId = it.uid
+                        val userRef = db.collection("users").document(userId)
+
+                        userRef.get().addOnSuccessListener { document ->
+                            if (!document.exists()) {
+                                val name = account.displayName ?: ""
+                                val email = account.email ?: ""
+                                val registrationDate = Timestamp.now()
+
+                                val userData = hashMapOf(
+                                    "name" to name,
+                                    "email" to email,
+                                    "birth_date" to "",
+                                    "gender" to "",
+                                    "height_cm" to 0,
+                                    "weight_kg" to 0,
+                                    "total_score" to 0,
+                                    "registration_date" to registrationDate
+                                )
+
+                                userRef.set(userData)
+                                    .addOnSuccessListener {
+                                        Log.d(TAG, "Usuario agregado a Firestore")
+                                        navigateToMainActivity()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.e(TAG, "Error al agregar usuario", e)
+                                        Toast.makeText(this, "Error al registrar usuario", Toast.LENGTH_SHORT).show()
+                                    }
+                            } else {
+                                Log.d(TAG, "Usuario ya existe en Firestore")
+                                navigateToMainActivity()
+                            }
+                        }.addOnFailureListener { e ->
+                            Log.e(TAG, "Error al verificar existencia de usuario", e)
+                            Toast.makeText(this, "Error verificando usuario", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 } else {
                     Log.w(TAG, "signInWithCredential fallido", task.exception)
                     Toast.makeText(this, "Falló la autenticación con Firebase", Toast.LENGTH_SHORT).show()
