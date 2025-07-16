@@ -76,6 +76,11 @@ class MainActivity : AppCompatActivity() {
         }
         firebaseAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+
+        val btnVerMapa = findViewById<Button>(R.id.btnMapas) // Assuming R.id.btnCalcularPeso is for IMC
+        btnVerMapa.setOnClickListener {
+            startActivity(Intent(this, MapaActivity::class.java))
+        }
     }
 
     private fun solicitarGenero() {

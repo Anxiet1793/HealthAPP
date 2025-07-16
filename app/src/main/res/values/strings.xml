@@ -14,6 +14,7 @@
     <string name="txtCantidadCalorias3">Calorias consumidas:</string>
     <string name="txtCantidadCalorias4">Calorias consumidas:</string>
     <string name="txtMostrarCalorias">Resultados de las calorias::</string>
+    <string name="txtMapas">Ver Mapa</string>
     <string name="btnVer">Ver</string>
     <string name="btnCalcular">Calcular</string>
     <string name="btnDetalles">Detalles</string>
@@ -37,4 +38,8 @@
     <string name="gender_male">Hombre</string>
     <string name="gender_female">Mujer</string>
     <string name="gender_selected_toast">Género guardado: %1$s</string>
+    <string name="btnMapa">ver</string>
+    <string name="txtLugaresFit">Lugares Fit</string>
+    <string name="txtAñadirFiltro">Añadir Filtro</string>
+    <string name="txtEliminarFiltro">Eliminar Filtro</string>
 </resources>

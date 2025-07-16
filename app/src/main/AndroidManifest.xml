@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.health.READ_HEIGHT"/>
     <uses-permission android:name="android.permission.health.READ_SLEEP"/>
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <queries>
         <package android:name="com.google.android.apps.healthdata" />
     </queries>
@@ -24,7 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
 
-    <activity
+    <activity android:name=".MapaActivity"
+        android:exported="false"/>
+        <activity
         android:name=".LoginActivity"
         android:exported="true">
         <intent-filter>
@@ -58,6 +64,10 @@
     <activity
         android:name=".ImcActivity"
         android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA1yunZstzWMzvfefQ2nzDPcEN3S8nXmuI" />
 
 </application>
 
