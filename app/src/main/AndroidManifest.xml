@@ -51,6 +51,10 @@
         android:name=".ui.PrivacyPolicyActivity"
         android:exported="false" />
 
+    <activity
+        android:name=".CaloriasActivity"
+        android:exported="false" />
+
 </application>
 
 </manifest>
