@@ -81,6 +81,10 @@ class MainActivity : AppCompatActivity() {
         btnVerMapa.setOnClickListener {
             startActivity(Intent(this, MapaActivity::class.java))
         }
+        val btnMisiones = findViewById<Button>(R.id.btnVerdesafios)
+        btnMisiones.setOnClickListener {
+            startActivity(Intent(this, MisionesActivity::class.java))
+        }
     }
 
     private fun solicitarGenero() {

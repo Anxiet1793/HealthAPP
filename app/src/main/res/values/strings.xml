@@ -24,7 +24,7 @@
     <string name="lblMedallas">Medallas:</string>
     <string name="btnConfig">Configuracion</string>
     <string name="btninicio">Inicio</string>
-    <string name="btnMisiones">Misiones</string>
+    <string name="btnMisiones">Ver Misiones</string>
     <string name="PasosDiarioslbl">Pasos Diarios</string>
     <string name="consent_dialog_title">Consentimiento de Datos de Salud</string>
     <string name="consent_dialog_message">Para mostrar tus datos de actividad física y ayudarte a alcanzar tus metas, necesitamos tu permiso para acceder a Health Connect. Puedes revisar nuestra Política de Privacidad para más detalles.</string>
@@ -42,4 +42,6 @@
     <string name="txtLugaresFit">Lugares Fit</string>
     <string name="txtAñadirFiltro">Añadir Filtro</string>
     <string name="txtEliminarFiltro">Eliminar Filtro</string>
+    <string name="lblDesafios">Misiones</string>
+    <string name="lblPasosRealizados">Pasos del dia</string>
 </resources>

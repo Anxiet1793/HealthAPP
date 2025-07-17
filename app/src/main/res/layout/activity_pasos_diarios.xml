@@ -25,20 +25,20 @@
         <!-- Contenedor reutilizable -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp"
+            android:layout_height="133dp"
             android:layout_marginBottom="12dp"
-            android:background="@drawable/rounded_bg">
+            android:background="@drawable/rounded_bg"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/tvPromedio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Promedio Diario:"
-                android:textStyle="bold"
-                android:textColor="#000000" />
+                android:text="@string/lblPasosRealizados"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvValorPromedio"
@@ -49,122 +49,47 @@
         </LinearLayout>
 
         <!-- Misión del Día -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/rounded_bg">
-
-            <TextView
-                android:id="@+id/tvMision"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Misión del Día:"
-                android:textStyle="bold"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/tvValorMision"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"
-                android:textColor="#000000" />
-        </LinearLayout>
-
-        <!-- Racha -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/rounded_bg">
-
-            <TextView
-                android:id="@+id/tvRacha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Racha:"
-                android:textStyle="bold"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/tvValorRacha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"
-                android:textColor="#000000" />
-        </LinearLayout>
-
-        <!-- Medallas -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/rounded_bg">
-
-            <TextView
-                android:id="@+id/tvMedalla"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Medallas:"
-                android:textStyle="bold"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/tvValorMedalla"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"
-                android:textColor="#000000" />
-        </LinearLayout>
 
         <!-- Menú inferior -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="16dp">
+            android:gravity="bottom"
+            android:layout_marginTop="16dp"
+            >
 
             <Button
                 android:id="@+id/btnConfig"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/btnConfig"
                 android:background="@drawable/rounded_button"
-                android:textColor="#000000"
-                android:textAllCaps="false"/>
+                android:text="@string/btnConfig"
+                android:textAllCaps="false"
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/btnInicio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btninicio"
-                android:background="@drawable/rounded_button"
-                android:textColor="#000000"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textAllCaps="false"/>
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:text="@string/btninicio"
+                android:textAllCaps="false"
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/btnDesafios"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/btnMisiones"
                 android:background="@drawable/rounded_button"
-                android:textColor="#000000"
-                android:textAllCaps="false"/>
+                android:text="@string/btnMisiones"
+                android:textAllCaps="false"
+                android:textColor="#000000" />
         </LinearLayout>
     </LinearLayout>
 

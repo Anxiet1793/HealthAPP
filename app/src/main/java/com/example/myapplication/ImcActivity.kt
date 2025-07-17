@@ -46,6 +46,9 @@ class ImcActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+
     }
 
     private fun calculateAndSaveImc() {
@@ -146,33 +149,37 @@ class ImcActivity : AppCompatActivity() {
 
 
     private fun saveImcToFirestore(heightCm: Int, weightKg: Double, bmi: Double, classification: String) {
-            val currentUser = firebaseAuth.currentUser
-            if (currentUser == null) {
+            val userId = firebaseAuth.currentUser?.uid ?: return
+            if (userId == null) {
                 Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
                 // Potentially redirect to LoginActivity
                 return
             }
-
+            val db = FirebaseFirestore.getInstance()
             val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val currentDate = sdf.format(Date())
 
-            val bmiRecord = BmiRecord(
-                date = currentDate,
-                weightKg = weightKg,
-                heightCm = heightCm,
-                bmi = bmi,
-                classification = classification
-            )
 
-            firestore.collection("users").document(currentUser.uid)
+        val data = hashMapOf(
+            "date" to currentDate,
+            "weightKg" to weightKg,
+            "heigthCm" to heightCm,
+            "bmi" to bmi,
+            "classification" to classification
+        )
+
+            db.collection("users")
+                .document(userId)
                 .collection("imc")
-                .add(bmiRecord)
+                .document(currentDate)
+                .set(data)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "IMC guardado correctamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "IMC actualizado correctamente", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error al guardar IMC: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Error al guardar: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
+
         }
 
 }

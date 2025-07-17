@@ -103,7 +103,7 @@ class CaloriasActivity : AppCompatActivity() {
         val diferencia = totalCalorias - targetCalories
         val mensaje = when {
             diferencia > 100 -> "🔺 Exceso: +$diferencia kcal sobre lo recomendado"
-            diferencia < -100 -> "🔻 Déficit: ${-diferencia} kcal por debajo"
+            diferencia < -200 -> "🔻 Déficit: ${-diferencia} kcal por debajo"
             else -> "✅ Equilibrio calórico"
         }
 

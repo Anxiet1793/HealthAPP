@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:id="@+id/misionesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp">
+
+        <!-- 🔙 Botón Volver -->
+        <Button
+            android:id="@+id/btnVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volver"
+            android:background="@drawable/rounded_button"
+            android:textColor="#000000"
+            android:textAllCaps="false"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 🎯 Puntos -->
+        <TextView
+            android:id="@+id/puntosText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎯 Puntos actuales: 0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#7DDC6D"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- 🧩 Misión 1: Peso Ideal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎯 Peso Ideal"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/statusPesoIdeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Última verificación: -"
+                android:textColor="#444444"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- 🏃‍♂️ Misión 2: Pasos diarios -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏃‍♂️ 6000 pasos diarios"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/statusPasos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado: -"
+                android:textColor="#444444"
+                android:layout_marginTop="4dp"/>
+
+
+        </LinearLayout>
+
+        <!-- 🍽️ Misión 3: Calorías adecuadas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🍽️ Calorías adecuadas"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/statusCalorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado: -"
+                android:textColor="#444444"
+                android:layout_marginTop="4dp"/>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/toprank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verificar top 🏆"
+            android:textColor="#000000"
+            android:background="@drawable/rounded_button"
+            android:layout_marginTop="8dp"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+</ScrollView>
