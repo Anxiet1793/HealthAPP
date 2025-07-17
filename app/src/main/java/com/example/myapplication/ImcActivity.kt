@@ -49,6 +49,25 @@ class ImcActivity : AppCompatActivity() {
     }
 
     private fun calculateAndSaveImc() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        firestore.collection("users").document(currentUser.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                val gender =
+                    document.getString("gender")?.lowercase() ?: "male" // por defecto hombre
+                procesarImc(gender)
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Error al obtener el género", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun procesarImc(gender: String) {
         val heightStr = etHeight.text.toString()
         val weightStr = etWeight.text.toString()
 
@@ -69,53 +88,94 @@ class ImcActivity : AppCompatActivity() {
         val bmi = weightKg / (heightM * heightM)
         val bmiRounded = String.format("%.2f", bmi).toDouble()
 
-        val classification = getBmiClassification(bmiRounded)
-
-        tvImcResultValue.text = String.format("%.2f", bmiRounded)
+        val classification = getBmiClassification(bmiRounded, gender)
+        tvImcResultValue.text = bmiRounded.toString()
         tvImcClassificationValue.text = classification
 
         saveImcToFirestore(heightCm, weightKg, bmiRounded, classification)
+        guardarCaloriasObjetivo(classification)
     }
 
-    private fun getBmiClassification(bmi: Double): String {
-        return when {
-            bmi < 18.5 -> "Bajo peso"
-            bmi < 24.9 -> "Normal"
-            bmi < 29.9 -> "Sobrepeso"
-            else -> "Obesidad"
+
+    private fun guardarCaloriasObjetivo(clasificacion: String) {
+        val userId = firebaseAuth.currentUser?.uid ?: return
+        val targetCalories = when (clasificacion) {
+            "Bajo peso" -> 2500 // superávit
+            "Normal" -> 2200 // mantenimiento
+            "Sobrepeso" -> 1800
+            "Obesidad I" -> 1600
+            "Obesidad II" -> 1400
+            "Obesidad mórbida" -> 1200
+            else -> 2200
         }
+
+        val updates = mapOf("target_calories" to targetCalories)
+
+        firestore.collection("users").document(userId)
+            .update(updates)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Meta calórica actualizada: $targetCalories kcal", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "No se pudo guardar el objetivo calórico", Toast.LENGTH_SHORT).show()
+            }
     }
+
+
+    private fun getBmiClassification(bmi: Double, gender: String): String {
+            return if (gender == "female") {
+                when {
+                    bmi < 18.0 -> "Bajo peso"
+                    bmi < 23.9 -> "Normal"
+                    bmi < 28.9 -> "Sobrepeso"
+                    bmi < 34.9 -> "Obesidad I"
+                    bmi < 39.9 -> "Obesidad II"
+                    else -> "Obesidad mórbida"
+                }
+            } else {
+                when {
+                    bmi < 18.5 -> "Bajo peso"
+                    bmi < 24.9 -> "Normal"
+                    bmi < 29.9 -> "Sobrepeso"
+                    bmi < 34.9 -> "Obesidad I"
+                    bmi < 39.9 -> "Obesidad II"
+                    else -> "Obesidad mórbida"
+                }
+            }
+        }
+
 
     private fun saveImcToFirestore(heightCm: Int, weightKg: Double, bmi: Double, classification: String) {
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser == null) {
-            Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
-            // Potentially redirect to LoginActivity
-            return
+            val currentUser = firebaseAuth.currentUser
+            if (currentUser == null) {
+                Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+                // Potentially redirect to LoginActivity
+                return
+            }
+
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val currentDate = sdf.format(Date())
+
+            val bmiRecord = BmiRecord(
+                date = currentDate,
+                weightKg = weightKg,
+                heightCm = heightCm,
+                bmi = bmi,
+                classification = classification
+            )
+
+            firestore.collection("users").document(currentUser.uid)
+                .collection("imc")
+                .add(bmiRecord)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "IMC guardado correctamente", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Error al guardar IMC: ${e.message}", Toast.LENGTH_LONG).show()
+                }
         }
 
-        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val currentDate = sdf.format(Date())
-
-        val bmiRecord = BmiRecord(
-            date = currentDate,
-            weightKg = weightKg,
-            heightCm = heightCm,
-            bmi = bmi,
-            classification = classification
-        )
-
-        firestore.collection("users").document(currentUser.uid)
-            .collection("imc")
-            .add(bmiRecord)
-            .addOnSuccessListener {
-                Toast.makeText(this, "IMC guardado correctamente", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al guardar IMC: ${e.message}", Toast.LENGTH_LONG).show()
-            }
-    }
-
 }
+
 
 

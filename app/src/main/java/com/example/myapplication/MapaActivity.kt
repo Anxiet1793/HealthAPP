@@ -29,39 +29,39 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val client = OkHttpClient()
 
-    private val apiKey = "TU_API_KEY"
+    private val apiKey = "AIzaSyA1yunZstzWMzvfefQ2nzDPcEN3S8nXmuI"
     private var ubicacionActual: LatLng = LatLng(-12.0464, -77.0428) // default: Lima
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa)
 
-        // Inicializar mapa
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        // Inicializar Places
+        // Inicializar Places si aún no está
         if (!Places.isInitialized()) {
             Places.initialize(applicationContext, apiKey)
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        // Spinner de filtros
+        // Configurar el spinner
         val spinner = findViewById<Spinner>(R.id.spinnerFiltros)
         val opciones = listOf("Gimnasios", "Restaurantes", "Tiendas Fit")
-        val tipos = listOf("gym", "restaurant", "store")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, opciones)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
 
-        spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val tipoSeleccionado = when (position) {
+                val tipo = when (position) {
                     0 -> "gym"
                     1 -> "restaurant"
                     2 -> "store"
                     else -> "store"
                 }
-                buscarLugaresCercanos(tipoSeleccionado)
+                buscarLugaresCercanos(tipo)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -69,6 +69,11 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
     }
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.isMyLocationEnabled = true
+        }
+
         obtenerUbicacion()
     }
 
@@ -87,14 +92,25 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+
     private fun buscarLugaresCercanos(tipo: String) {
         mMap.clear()
+
+        val keyword = when (tipo) {
+            "gym" -> "gimnasio"
+            "restaurant" -> "comida saludable"
+            "store" -> "suplementos"
+            else -> "salud"
+        }
+
         val url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" +
                 "?location=${ubicacionActual.latitude},${ubicacionActual.longitude}" +
                 "&radius=2000" +
                 "&type=$tipo" +
-                "&keyword=fit" +
+                "&keyword=${keyword.replace(" ", "%20")}"+
                 "&key=$apiKey"
+
+        println("🔍 URL: $url") // Para debug en Logcat
 
         val request = Request.Builder().url(url).build()
 
@@ -104,11 +120,22 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
                     Toast.makeText(applicationContext, "Error al buscar lugares", Toast.LENGTH_SHORT).show()
                 }
             }
+
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
                 val data = response.body?.string() ?: return
                 val json = JSONObject(data)
-                val results = json.getJSONArray("results")
 
+                val status = json.getString("status")
+                if (status != "OK") {
+                    val errorMessage = json.optString("error_message", "Sin mensaje de error")
+                    runOnUiThread {
+                        Toast.makeText(applicationContext, "Error: $status\n$errorMessage", Toast.LENGTH_LONG).show()
+                    }
+                    println("❌ Error API: $status - $errorMessage")
+                    return
+                }
+
+                val results = json.getJSONArray("results")
                 runOnUiThread {
                     for (i in 0 until results.length()) {
                         val lugar = results.getJSONObject(i)
@@ -122,7 +149,10 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         })
+
     }
+
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
