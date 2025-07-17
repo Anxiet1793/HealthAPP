@@ -160,13 +160,13 @@ class ImcActivity : AppCompatActivity() {
             val currentDate = sdf.format(Date())
 
 
-        val data = hashMapOf(
-            "date" to currentDate,
-            "weightKg" to weightKg,
-            "heigthCm" to heightCm,
-            "bmi" to bmi,
-            "classification" to classification
-        )
+            val data = hashMapOf(
+                "date" to currentDate,
+                "weightKg" to weightKg,
+                "heigthCm" to heightCm,
+                "bmi" to bmi,
+                "classification" to classification
+            )
 
             db.collection("users")
                 .document(userId)
